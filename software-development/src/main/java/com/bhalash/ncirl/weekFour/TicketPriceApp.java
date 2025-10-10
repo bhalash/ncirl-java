@@ -30,7 +30,7 @@ public class TicketPriceApp {
     } catch (InputMismatchException e) {
       scanner.next();
       System.out.println("Ha ha, very funny.\n");
-      return TicketPriceApp.getUserAge(scanner);
+      return getUserAge(scanner);
     }
   }
 }
