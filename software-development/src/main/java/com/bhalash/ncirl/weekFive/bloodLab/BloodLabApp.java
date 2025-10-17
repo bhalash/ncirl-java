@@ -1,7 +1,11 @@
 package com.bhalash.ncirl.weekFive.bloodLab;
 
-// INFO(mark 2025-10-16): Read user age and blood type. Notify them on from whom
-// they can receive blooo, and if they are over 18, on to whom they can donate.
+/**
+ * You have been asked to develop an application that allows a user to enter
+ * their age and blood type. The app will then display a message outlining which
+ * blood groups the user can donate to and receive from. Please note that only
+ * 18+ can donate. Use instantiable classes in your application.
+ */
 public class BloodLabApp {
   public static void main(String[] args) {
     printWelcome();
