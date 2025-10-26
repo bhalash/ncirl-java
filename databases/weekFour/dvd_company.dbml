@@ -1,0 +1,110 @@
+// INFO(mark 2025-10-26): This is probably overkill, but I'm used to ERDs to
+// spec out whole features, and these need need to be at least detailed enough
+// for a first-pass review, and robust enough to hold up to the review.
+//
+// There's so much I've left out in terms of referential integrity and cascades.
+
+// Primary
+// -----------------------------------------------------------------------------
+
+Table branches {
+  id int [pk, unique]
+  created_at datetime
+  updated_at datetime
+  ~address
+}
+
+Table employees {
+  id int [pk, unique]
+  created_at datetime [note: 'Date hired.']
+  updated_at datetime
+  first_name varchar(64)
+  last_name varchar(64)
+  position employee_position
+  salary int
+  ~address
+}
+
+Table members {
+  id int [pk, unique]
+  created_at datetime [note: 'Date registered.']
+  updated_at datetime
+  registered_at datetime
+  first_name varchar(64)
+  last_name varchar(64)
+  ~address
+}
+
+Table films {
+  id int [pk, unique]
+  created_at datetime
+  updated_at datetime
+  title varchar(128)
+  category varchar(32)
+}
+
+// Partials
+// -----------------------------------------------------------------------------
+
+TablePartial address {
+  phone_number varchar(12)
+  street_address varchar(64)
+  telephone_number varchar(32)
+  postcode varchar(12)
+  county county
+}
+
+// Joins
+// -----------------------------------------------------------------------------
+
+// A branch has many members.
+// A member has one branch.
+// Ref branch_members: branches.id > members.id
+Table branch_members {
+  id int [pk, unique]
+  branch_id int [ref: > branches.id]
+  member_id int [ref: - members.id]
+}
+
+// A branch has many employees.
+// An employee has one branch.
+// Ref branch_employees: branches.id > employees.id
+Table branch_employees {
+  id int [pk, unique]
+  branch_id int [ref: > branches.id]
+  employee_id int [ref: - employees.id]
+}
+
+// A branch has many films.
+// A film has many branches.
+// Inventory count and details are inferred from this table.
+// Ref branch_films: branches.id <> films.id
+Table branch_films {
+  id int [pk, unique] // treat as a serial for an inventory item
+  branch_id int [ref: > branches.id]
+  film_id int [ref: > films.id]
+}
+
+// A branch film can be rented once.
+// A member can rent many films.
+Table film_rentals {
+  branch_film_id int [ref: - branch_films.id]
+  member_id int [ref: > members.id]
+  created_at datetime [note: 'Date rented.']
+  updated_at datetime
+  due_back_at datetime
+}
+
+// Enums
+// -----------------------------------------------------------------------------
+
+enum employee_position {
+  staff
+  manager
+}
+
+enum county {
+  galway
+  cork
+  // ...
+}
