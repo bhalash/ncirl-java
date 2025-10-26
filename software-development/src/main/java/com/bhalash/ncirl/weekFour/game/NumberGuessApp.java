@@ -1,8 +1,12 @@
 package com.bhalash.ncirl.weekFour.game;
 
+/**
+ * INFO(mark 2025-10-26): Guessing game app. User has 3 chances to guess the
+ * hidden random number.
+ */
 public class NumberGuessApp {
   public static void main(String[] args) {
-    final int maxGuesses = 5;
+    final int maxGuesses = 3;
     final int maxRandom = 10;
 
     final NumberGuessGame game = new NumberGuessGame(maxGuesses, maxRandom);

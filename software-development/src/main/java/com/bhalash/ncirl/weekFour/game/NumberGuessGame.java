@@ -2,8 +2,6 @@ package com.bhalash.ncirl.weekFour.game;
 
 import java.util.Random;
 
-// INFO(mark 2025-10-07): Handles the state of the number guess game and checks
-// for win conditions.
 public class NumberGuessGame {
   private final Random random = new Random();
   private int guessCount;
