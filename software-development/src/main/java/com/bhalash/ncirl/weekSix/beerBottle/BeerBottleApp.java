@@ -9,15 +9,15 @@ public class BeerBottleApp {
     System.out.println("\n99 Bottles of Beer: A Song in 20 Lines of Code");
     System.out.println("=".repeat(12) + "\n");
 
-    for (Integer i = 99; i >= 0; i--) {
+    for (int i = 99; i > 0; i--) {
       printVerse(i);
     }
   }
 
   private static void printVerse(int bottle) {
     String nextBottle = switch (bottle) {
-      case 1 -> "1 bottle";
-      case 0 -> "no more bottles";
+      case 2  -> "1 bottle";
+      case 1  -> "no more bottles";
       default -> (bottle - 1) + " bottles";
     };
 
